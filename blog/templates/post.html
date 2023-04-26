@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+{{ post.text|safe }}
+<hr>
+<h3>Комментарии</h3>
+{# список комментариев #}
+<hr>
+<h3>Введите ваш комментарий</h3>
+<form method="post">
+    {{ form.hidden_tag() }}
+    {# поле ввода для комментария #}
+    <p><input type="submit" value="Добавить"></p>
+</form>
+{% endblock %}

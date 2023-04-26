@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Вход в систему</h1>
+{% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <p class="error">{{ message }}</p>
+    {% endfor %}
+{% endwith %}
+<form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.username.label }}
+    {{ form.username() }}
+    {{ form.password.label }}
+    {{ form.username() }}
+    <input type="submit" value="Войти">
+</form>
+{% endblock %}
