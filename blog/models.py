@@ -2,7 +2,6 @@ from hashlib import scrypt
 from os import urandom
 from base64 import b64encode, b64decode
 
-import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, UserMixin
@@ -46,13 +45,15 @@ class Post(db.Model):
     text = db.Column(db.Text)
     published = db.Column(db.DateTime, nullable=False)
     comments = db.relationship("Comment", back_populates="post")
-
     def __str__(self):
         return self.title
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    guest = db.Column(db.String(75), nullable=False)
+    username = db.Column(db.String(25), nullable=False, unique=True)
     text = db.Column(db.Text)
-    post_id = db.Column(db.Integer(), db.ForeignKey("post.id", name="Post"))
+    published = db.Column(db.DateTime, nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("post.id", name="post"))
     post = db.relationship("Post", back_populates="comments")
+    def __str__(self):
+        return self.title
